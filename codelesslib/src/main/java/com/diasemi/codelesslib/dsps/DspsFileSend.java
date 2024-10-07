@@ -373,11 +373,15 @@ public class DspsFileSend {
         if (CodelessLibLog.DSPS)
             Log.d(TAG, "Load file: " + (file != null ? file.getAbsolutePath() : uri.toString()));
 
+        // [SL (BCA)] This storage permission is not required and causes the
+        // file send operation to fail without a valid reason
+        /*
         if (Build.VERSION.SDK_INT >= 23 && file != null && manager.getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "Missing storage permission");
             EventBus.getDefault().post(new CodelessEvent.DspsFileError(manager, this));
             return;
         }
+        */
 
         InputStream inputStream = null;
         byte[] data;
